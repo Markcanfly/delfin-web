@@ -12,7 +12,7 @@ const SignOutButton = () => {
   };
 
   return (
-    <button className="p-2 bg-blue-600 rounded-md text-white" onClick={handleClickSignOutButton}>
+    <button className="p-2 bg-blue-600 rounded-md text-white" onClick={handleClickSignOutButton} disabled={isPending}>
       {isPending ? "Signing Out..." : "Sign Out"}
     </button>
   );

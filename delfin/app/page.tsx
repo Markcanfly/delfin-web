@@ -1,7 +1,5 @@
-// import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { getUser } from "@/lib/auth";
-import SignOutButton from "@/components/SignOutButton";
 
 export default async function Home() {
   const user = await getUser();
@@ -9,7 +7,7 @@ export default async function Home() {
   return (
     <>
       <header>
-        <Navbar />
+        <Navbar user={user} />
       </header>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="flex flex-col items-center">
@@ -20,7 +18,6 @@ export default async function Home() {
             {user ? (
               <>
                 <p>Welcome, {user.email}!</p>
-                <SignOutButton />
               </>
             ) : (
               <p className="font-bold text-red-500">To see the welcome message, please log in!</p>
