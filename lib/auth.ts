@@ -1,5 +1,9 @@
-import { CookieMethods, createServerClient, type CookieOptions } from "@supabase/ssr";
-import { cookies as nextCookies } from "next/headers";
+import {
+  CookieMethods,
+  createServerClient,
+  type CookieOptions,
+} from '@supabase/ssr';
+import { cookies as nextCookies } from 'next/headers';
 
 export const getUser = async () => {
   const auth = getSupabaseAuth({ isComponent: true });
@@ -11,7 +15,7 @@ export const protectAction = async () => {
   const auth = getSupabaseAuth({ isComponent: true });
   const user = (await auth.getUser()).data.user;
 
-  if (!user) throw new Error("Not authorized");
+  if (!user) throw new Error('Not authorized');
 };
 
 export const getServerActionAuth = () => {
@@ -34,12 +38,16 @@ const getSupabaseAuth = ({ isComponent = true }: { isComponent: boolean }) => {
         cookieStore.set({ name, value, ...options });
       },
       remove(name: string, options: CookieOptions) {
-        cookieStore.set({ name, value: "", ...options });
+        cookieStore.set({ name, value: '', ...options });
       },
     };
   }
 
-  const client = createServerClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!, { cookies });
+  const client = createServerClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    { cookies }
+  );
 
   return client.auth;
 };
