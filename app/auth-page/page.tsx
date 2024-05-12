@@ -2,7 +2,7 @@
 
 import { loginAction, signupAction } from '@/actions/users';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import Link from 'next/link';
 
 const AuthPage = () => {
@@ -12,8 +12,18 @@ const AuthPage = () => {
 
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [currentUrl, setCurrentUrl] = useState<string>('');
 
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    
+    if (typeof window !== 'undefined') {
+      
+      setCurrentUrl(window.location.host);
+    }
+  }, []);
+  
   const handleClickLoginButton = (formData: FormData) => {
     startTransition(async () => {
       const { errorMessage } = await loginAction(formData);
@@ -28,7 +38,7 @@ const AuthPage = () => {
   const handleClickSignupButton = (formData: FormData) => {
     if (password === confirmPassword) {
       startTransition(async () => {
-        const { errorMessage } = await signupAction(formData);
+        const { errorMessage } = await signupAction(formData, currentUrl);
         if (errorMessage) {
           console.log(errorMessage);
         } else {
@@ -85,7 +95,7 @@ const AuthPage = () => {
                   ? 'Logging in...'
                   : 'Log in'
                 : isPending
-                  ? 'Signing un...'
+                  ? 'Signing up...'
                   : 'Sign up'}
             </button>
             <Link

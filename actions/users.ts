@@ -27,7 +27,7 @@ export const loginAction = async (formData: FormData) => {
   }
 };
 
-export const signupAction = async (formData: FormData) => {
+export const signupAction = async (formData: FormData, currentUrl: string) => {
   try {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
@@ -42,7 +42,7 @@ export const signupAction = async (formData: FormData) => {
         data: {
           name,
         },
-        emailRedirectTo: "http://localhost:3000/auth-page/callback",
+        emailRedirectTo: `http://${currentUrl}/auth-page/callback`,
       },
     });
 

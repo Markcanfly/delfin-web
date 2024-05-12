@@ -13,7 +13,7 @@ const Navbar = ({ user }: { user: User | null }) => {
         <div className="flex">
           {user ? (
             <>
-              <p className="flex items-center jusitfy-center p-2 mr-10 text-white">
+              <p className="flex items-center p-2 mr-10 text-white">
                 {user.email}
               </p>
               <SignOutButton />
