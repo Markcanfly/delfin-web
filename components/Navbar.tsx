@@ -22,13 +22,13 @@ const Navbar = ({ user }: { user: User | null }) => {
             <>
               <Link
                 href="/auth-page?login=1"
-                className="flex items-center jusitfy-center p-2 mr-10 bg-cyan-200 rounded-md"
+                className="flex items-center justify-center p-2 mr-10 bg-cyan-200 rounded-md"
               >
                 Login
               </Link>
               <Link
                 href="/auth-page?login=0"
-                className="flex items-center jusitfy-center p-2 bg-blue-600 rounded-md text-white"
+                className="flex items-center justify-center p-2 bg-blue-600 rounded-md text-white"
               >
                 Signup
               </Link>
